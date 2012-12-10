@@ -1,0 +1,14 @@
+OPTIONS=autopickup,pickup_types:$
+OPTIONS=autodig
+OPTIONS=!prayconfirm,!cmdassist
+OPTIONS=number_pad:0
+OPTIONS=boulder:0
+OPTIONS=name:tourn,fruit:Brownie
+#OPTIONS=role:valkyrie,race:dwarf
+OPTIONS=role:wizard,race:orc,gender:male
+OPTIONS=disclose:yi ya yv -g nc
+#OPTIONS=hilite_pet
+OPTIONS=color
+OPTIONS=time,showexp
+#OPTIONS=suppress_alert:3.4.3
+OPTIONS=monsters:abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ@8'&;:~]

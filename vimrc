@@ -19,15 +19,17 @@ set cindent
 set cinkeys-=0#
 set cinkeys-=:
 
-set lcs=tab:‣\ ,eol:¬,trail:~
+"search case
+set ignorecase 
+set smartcase 
 
-"set encoding=ISO-8859-1
+set listchars=tab:‣\ ,eol:¬,trail:~
+
 set encoding=utf-8
 
 "map escape to 'jj' in insert mode
 :inoremap jj <esc>
 :nnoremap <space> :noh
-":nnoremap K k
 
 "mouse support
 set mouse=a

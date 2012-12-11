@@ -117,6 +117,11 @@ function fus {
   mv $1 $filename
 }
 
+#fuzzy cd
+function cdf {
+	cd *"$1"*/
+}
+
 #VI-Mode
 set -o vi
 export EDITOR='vim'

@@ -42,6 +42,8 @@ set modeline
 " Shortcut to rapidly toggle `set list`
 nmap <leader>l :set list!<CR>
 
+nmap <leader>p :set paste!<CR>
+
 "improved % - match xml tags
 "source ~/.vim/plugin/matchit.vim
 filetype plugin on

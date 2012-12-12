@@ -1,3 +1,5 @@
+call pathogen#infect()
+
 filetype plugin indent on
 autocmd FileType php set keywordprg=~/code/php/phpdoc.sh
 

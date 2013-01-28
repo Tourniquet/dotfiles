@@ -101,6 +101,8 @@ alias mysql="mysql --auto-rehash"
 #typos
 alias shh=ssh
 alias abd=adb
+alias gut=git
+alias gitt=git
 
 
 function cdl { cd "$1" && l ; }

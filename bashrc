@@ -30,18 +30,25 @@ MYVIMRC=$BASHRC_DIR/.vimrc
 git_prompt () {
   c_git_clean='\[\033[32m\]'
   c_git_dirty='\[\033[31m\]'
+  c_git_undecided='\[\033[33m\]'
   c_reset='\[\033[0m\]'
   if ! git rev-parse --git-dir > /dev/null 2>&1; then
     return 0
   fi
 
+
   git_branch=$(git branch 2>/dev/null | sed -n '/^\*/s/^\* //p')
 
-  if git diff --quiet 2>/dev/null >&2; then
-    git_color="$c_git_clean"
-  else
-    git_color="$c_git_dirty"
+  if [[ -z $STFU ]]; then #TODO find a better name for this variable
+    if git diff --quiet 2>/dev/null >&2; then
+      git_color="$c_git_clean"
+    else
+      git_color="$c_git_dirty"
+    fi
+  else 
+    git_color="$c_git_undecided"
   fi
+
 
   echo " [$git_color$git_branch${c_reset}]"
 }
@@ -119,7 +126,7 @@ function fus {
 
 #fuzzy cd
 function cdf {
-	cd *"$1"*/
+  cd *"$1"*/
 }
 
 #VI-Mode

@@ -1,76 +1,274 @@
-call pathogen#infect()
+" ----------------------------------------------------------------------------
+"  Vundle setup
+" ----------------------------------------------------------------------------
+filetype off 			" Required for Vundle
 
-filetype plugin indent on
-autocmd FileType php set keywordprg=~/code/php/phpdoc.sh
+set rtp+=~/.vim/bundle/vundle/	" Add vundle to the RuntimePath
+call vundle#rc()
 
-" set ai                  " auto indenting
-set history=100         " keep 100 lines of history
-set ruler               " show the cursor position
-syntax on               " syntax highlighting
-color ir_black
+" Let Vundle manage Vundle. Required!
+Bundle 'gmarik/vundle'
+
+" Language-specific syntax files
+Bundle 'elzr/vim-json'
+Bundle 'tpope/vim-markdown'
+Bundle 'tpope/vim-git'
+
+" Various editing plugins
+Bundle 'tpope/vim-repeat'
+Bundle 'tpope/vim-surround'
+Bundle 'nelstrom/vim-visual-star-search'
+Bundle 'godlygeek/tabular'
+Bundle 'tsaleh/vim-matchit'
+
+" Git plugins
+Bundle 'tpope/vim-fugitive'
+
+" Syntax check on buffer save
+Bundle 'scrooloose/syntastic'
+
+" Colorschemes
+"Bundle 'altercation/vim-colors-solarized'
+
+filetype plugin indent on     " required!
+
+" ----------------------------------------------------------------------------
+"  moving around, searching and patterns
+" ----------------------------------------------------------------------------
+"set nostartofline   " keep cursor in same column for long-range motion cmds
+set incsearch			  " Highlight pattern matches as you type
+set ignorecase			" ignore case when using a search pattern
+set smartcase			  " override 'ignorecase' when pattern
+                    " has upper case character
+
+" ----------------------------------------------------------------------------
+"  displaying text
+" ----------------------------------------------------------------------------
+set scrolloff=3       " number of screen lines to show around
+                      " the cursor
+
+set linebreak			    " For lines longer than the window,
+                      " wrap intelligently. This doesn't
+                      " insert hard line breaks.
+
+set showbreak=↪\ \ 		" string to put before wrapped screen
+                      " lines
+
+set sidescrolloff=2		" min # of columns to keep left/right of cursor
+set display+=lastline " show last line, even if it doesn't fit in the window
+
+"set cmdheight=2 		  " # of lines for the command window
+                      " cmdheight=2 helps avoid 'Press ENTER...'
+                      " prompts
+
+if &listchars ==# 'eol:$'
+  set listchars=tab:>\ ,trail:-,extends:>,precedes:<,nbsp:+
+  if &termencoding ==# 'utf-8' || &encoding ==# 'utf-8'
+    let &listchars = "tab:\u21e5 ,trail:\u2423,extends:\u21c9,precedes:\u21c7,nbsp:\u26ad"
+    "set listchars=tab:‣\ ,eol:¬,trail:~
+  endif
+endif
+
+"set number			      " show line numbers
+
+" ----------------------------------------------------------------------------
+"  syntax, highlighting and spelling
+" ----------------------------------------------------------------------------
+syntax enable
+set background=dark
+colorscheme ir_black
+
 set hlsearch            " highlight the last searched term
-filetype plugin on      " use the file type plugins
-au BufNewFile,BufRead *.ics set filetype=ics
-" set nu			" Line Numbers
+"set colorcolumn=80    " display a line in column 80 to show you
+                      " when to line break.
+
+" ----------------------------------------------------------------------------
+"  multiple windows
+" ----------------------------------------------------------------------------
+set laststatus=2 "show status line
+
+set statusline=
+set statusline+=b%-1.3n\ >                    " buffer number
+set statusline+=\ %{fugitive#statusline()}:
+set statusline+=\ %F
+set statusline+=\ %M
+set statusline+=%R
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
+set statusline+=%=
+set statusline+=\ %Y
+set statusline+=\ <\ %{&fenc}
+set statusline+=\ <\ %{&ff}
+set statusline+=\ <\ %p%%
+set statusline+=\ %l:
+set statusline+=%02.3c  
+
+" jamessan's statusline
+"set statusline=   " clear the statusline for when vimrc is reloaded
+"set statusline+=%-3.3n\                      " buffer number
+"set statusline+=%f\                          " file name
+"set statusline+=%h%m%r%w                     " flags
+"set statusline+=[%{strlen(&ft)?&ft:'none'},  " filetype
+"set statusline+=%{strlen(&fenc)?&fenc:&enc}, " encoding
+"set statusline+=%{&fileformat}]              " file format
+"set statusline+=%=                           " right align
+"set statusline+=%{synIDattr(synID(line('.'),col('.'),1),'name')}\  " highlight
+"set statusline+=%b,0x%-8B\                   " current char
+"set statusline+=%-14.(%l,%c%V%)\ %<%P        " offset
+
+" ----------------------------------------------------------------------------
+"  multiple tab pages
+" ----------------------------------------------------------------------------
+
+" ----------------------------------------------------------------------------
+"  terminal
+" ----------------------------------------------------------------------------
+set ttyfast
+
+" ----------------------------------------------------------------------------
+"  using the mouse
+" ----------------------------------------------------------------------------
+set mouse=a
+
+" ----------------------------------------------------------------------------
+"  messages and info
+" ----------------------------------------------------------------------------
+"TODO try this
+"set showcmd			    " In the status bar, show incomplete commands 
+                    " as they are typed
+
+set ruler			      " Always display the current cursor position in
+                    " the Status Bar
+
+" ----------------------------------------------------------------------------
+"  selecting text
+" ----------------------------------------------------------------------------
+"set clipboard=unnamed	" Yank to the system clipboard by default
+
+" ----------------------------------------------------------------------------
+"  editing text
+" ----------------------------------------------------------------------------
+set backspace=indent,eol,start  "backspace over everything
+
+"TODO try
+"set showmatch  			    " when inserting a bracket, briefly jump to its
+                        " match
+
+" ----------------------------------------------------------------------------
+"  tabs and indenting
+" ----------------------------------------------------------------------------
+"set smarttab              " <TAB> in front of line inserts 'shiftwidth' blanks
+set shiftround            " round to 'shiftwidth' for "<<" and ">>" 
+
 set tabstop=2
 set softtabstop=2
-set shiftwidth=2		" tab = 4 spaces
+set shiftwidth=2	
 set noexpandtab
-"set autoindent
+
 set cindent
 set cinkeys-=0#
 set cinkeys-=:
 
-"search case
-set ignorecase 
-set smartcase 
+" ----------------------------------------------------------------------------
+"  folding
+" ----------------------------------------------------------------------------
+set nofoldenable 		  " When opening files, all folds open by default
 
-set listchars=tab:‣\ ,eol:¬,trail:~
+" ----------------------------------------------------------------------------
+"  diff mode
+" ----------------------------------------------------------------------------
 
-set encoding=utf-8
-
+" ----------------------------------------------------------------------------
+"  mapping
+" ----------------------------------------------------------------------------
 "map escape to 'jj' in insert mode
 :inoremap jj <esc>
+
+"space cancels higlighting
 :nnoremap <space> :noh
-
-"mouse support
-set mouse=a
-
-"enabling deleting of stuff not entered in this insert session
-set backspace=2
-
-"enable modeline
-set modelines=5
-set modeline
-
-"sudo write
-cnoremap w!! w !sudo tee % > /dev/null
-
-set laststatus=2
-" jamessan's statusline
-set statusline=   " clear the statusline for when vimrc is reloaded
-set statusline+=%-3.3n\                      " buffer number
-set statusline+=%f\                          " file name
-set statusline+=%h%m%r%w                     " flags
-set statusline+=[%{strlen(&ft)?&ft:'none'},  " filetype
-set statusline+=%{strlen(&fenc)?&fenc:&enc}, " encoding
-set statusline+=%{&fileformat}]              " file format
-set statusline+=%=                           " right align
-set statusline+=%{synIDattr(synID(line('.'),col('.'),1),'name')}\  " highlight
-set statusline+=%b,0x%-8B\                   " current char
-set statusline+=%-14.(%l,%c%V%)\ %<%P        " offset
-
- 
- 
 
 " Shortcut to rapidly toggle `set list`
 nmap <leader>l :set list!<CR>
 
 nmap <leader>p :set paste!<CR>
 
-"improved % - match xml tags
-"source ~/.vim/plugin/matchit.vim
-filetype plugin on
+"sudo write
+cnoremap w!! w !sudo tee % > /dev/null
+
+" ----------------------------------------------------------------------------
+"  reading and writing files
+" ----------------------------------------------------------------------------
+set autoread			    " Automatically re-read files changed outside
+                      " of Vim
+
+" ----------------------------------------------------------------------------
+"  the swap file
+" ----------------------------------------------------------------------------
+
+"if has("win32") || has("win64")
+"  set directory=$TEMP
+"else
+"  " Vim will try this ordered list of directories for .swp files
+"  set directory=~/tmp,.,/var/tmp,/tmp
+"endif
+
+" ----------------------------------------------------------------------------
+"  command line editing
+" ----------------------------------------------------------------------------
+set history=200 		" Save more commands in history
+                    " See Practical Vim, by Drew Neil, pg 68
+
+set wildmode=list:longest,full
+
+" File tab completion ignores these file patterns
+set wildignore+=*.exe,*.swp,.DS_Store
+set wildmenu
+
+" Add guard around 'wildignorecase' to prevent terminal vim error
+if exists('&wildignorecase')
+  set wildignorecase
+endif
+
+" ----------------------------------------------------------------------------
+"  executing external commands
+" ----------------------------------------------------------------------------
+
+" ----------------------------------------------------------------------------
+"  running make and jumping to errors
+" ----------------------------------------------------------------------------
+
+" ----------------------------------------------------------------------------
+"  language specific
+" ----------------------------------------------------------------------------
+
+" ----------------------------------------------------------------------------
+"  multi-byte characters
+" ----------------------------------------------------------------------------
+set encoding=utf-8
+
+" ----------------------------------------------------------------------------
+"  various
+" ----------------------------------------------------------------------------
+set gdefault                    " For :substitute, use the /g flag by default
+
+"enable modeline
+set modelines=5
+set modeline
+
+" ----- my old stuff
+au BufNewFile,BufRead *.ics set filetype=ics
+
+" ----------------------------------------------------------------------------
+" Allow overriding these settings
+" ----------------------------------------------------------------------------
+if filereadable(expand("~/.vimrc.local"))
+  source ~/.vimrc.local
+endif
+
+" ----------------------------------------------------------------------------
+" Autocmds
+" ----------------------------------------------------------------------------
 
 " When editing a file, always jump to the last cursor position
 autocmd BufReadPost *

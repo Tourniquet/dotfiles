@@ -10,3 +10,5 @@
   lg = !"git lg1"
 [core]
 	pager = less -x5,9
+[diff]
+	tool = p4merge

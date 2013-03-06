@@ -20,6 +20,7 @@ Bundle 'tpope/vim-surround'
 Bundle 'nelstrom/vim-visual-star-search'
 Bundle 'godlygeek/tabular'
 Bundle 'tsaleh/vim-matchit'
+Bundle 'vim-scripts/closetag.vim'
 
 " Git plugins
 Bundle 'tpope/vim-fugitive'
@@ -50,9 +51,6 @@ set scrolloff=3       " number of screen lines to show around
 set linebreak			    " For lines longer than the window,
                       " wrap intelligently. This doesn't
                       " insert hard line breaks.
-
-set showbreak=↪\ \ 		" string to put before wrapped screen
-                      " lines
 
 set sidescrolloff=2		" min # of columns to keep left/right of cursor
 set display+=lastline " show last line, even if it doesn't fit in the window

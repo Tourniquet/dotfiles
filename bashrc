@@ -152,6 +152,10 @@ export HISTIGNORE=" *"
 #Shell colors
 export CLICOLOR=1
 
+if [[ -d ~/bin/ ]]; then
+	PATH="$PATH":~/bin
+fi
+
 if [[ -f ~/.firstTimeHere ]]; then
   which view 2> /dev/null
   vimret=$?

@@ -83,6 +83,9 @@ set hlsearch            " highlight the last searched term
 " ----------------------------------------------------------------------------
 "  multiple windows
 " ----------------------------------------------------------------------------
+
+set hidden
+
 set laststatus=2 "show status line
 
 set statusline=

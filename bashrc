@@ -96,7 +96,7 @@ alias clock="while true; do clear; date; sleep 1; done;"
 alias grep="grep --color=auto"
 alias fgrep='fgrep --color=auto'
 alias egrep='egrep --color=auto'
-alias td='thing=$RANDOM; mkdir /tmp/`whoami`$thing; cd /tmp/`whoami`$thing'
+alias td='rnd=$RANDOM; mkdir /tmp/`whoami`$rnd; cd /tmp/`whoami`$rnd'
 alias rot13="tr a-zA-Z n-za-mN-ZA-M"
 alias mysql="mysql --auto-rehash"
 

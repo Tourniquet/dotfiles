@@ -53,10 +53,12 @@ git_prompt () {
   echo " [$git_color$git_branch${c_reset}]"
 }
 
-export PS1="\[\033[$COLOR\][\A]\${?#0}\u@\h\[\033[0m\]:\[\033[$COLOR\]\w\\[\033[0m\]\$ "
-which git > /dev/null 2>&1
-if [ $? -eq 0 ] ; then
-  export PROMPT_COMMAND='PS1="\[\033[$COLOR\][\A]\${?#0}\u@\h\[\033[0m\]:\[\033[$COLOR\]\w\[\033[0m\]`git_prompt`\[\033[0m\]\$\[\033[0m\] "'
+if [ -z "$disableGitPrompt" ]; then
+	export PS1="\[\033[$COLOR\][\A]\${?#0}\u@\h\[\033[0m\]:\[\033[$COLOR\]\w\\[\033[0m\]\$ "
+	which git > /dev/null 2>&1
+	if [ $? -eq 0 ] ; then
+		export PROMPT_COMMAND='PS1="\[\033[$COLOR\][\A]\${?#0}\u@\h\[\033[0m\]:\[\033[$COLOR\]\w\[\033[0m\]`git_prompt`\[\033[0m\]\$\[\033[0m\] "'
+	fi
 fi
 
 # If this is an xterm set the title to user@host:dir

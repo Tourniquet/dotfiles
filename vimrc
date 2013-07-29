@@ -13,6 +13,8 @@ Bundle 'gmarik/vundle'
 Bundle 'elzr/vim-json'
 Bundle 'tpope/vim-markdown'
 Bundle 'tpope/vim-git'
+Bundle 'hail2u/vim-css-syntax'
+Bundle 'mattn/zencoding-vim'
 
 " Various editing plugins
 Bundle 'tpope/vim-repeat'
@@ -21,6 +23,8 @@ Bundle 'nelstrom/vim-visual-star-search'
 Bundle 'godlygeek/tabular'
 Bundle 'tsaleh/vim-matchit'
 Bundle 'vim-scripts/closetag.vim'
+Bundle 'kana/vim-textobj-user'
+Bundle 'glts/vim-textobj-comment'
 
 " Git plugins
 Bundle 'tpope/vim-fugitive'
@@ -29,7 +33,8 @@ Bundle 'tpope/vim-fugitive'
 Bundle 'scrooloose/syntastic'
 
 " Colorschemes
-"Bundle 'altercation/vim-colors-solarized'
+Bundle 'Tourniquet/vim-colors-ir_black'
+Bundle 'vim-scripts/xoria256.vim'
 
 filetype plugin indent on     " required!
 
@@ -74,7 +79,15 @@ endif
 " ----------------------------------------------------------------------------
 syntax enable
 set background=dark
-colorscheme ir_black
+
+if $COLORTERM == 'gnome-terminal'
+	set t_Co=256
+endif
+if &t_Co == 256
+	" settings for pretty 256-color theme
+	"colorscheme ir_black
+	colorscheme xoria256
+endif
 
 set hlsearch            " highlight the last searched term
 "set colorcolumn=80    " display a line in column 80 to show you
@@ -104,6 +117,7 @@ set statusline+=\ <\ %{&ff}
 set statusline+=\ <\ %p%%
 set statusline+=\ %l:
 set statusline+=%02.3c  
+set statusline+=%{HasPaste()}
 
 " jamessan's statusline
 "set statusline=   " clear the statusline for when vimrc is reloaded
@@ -251,6 +265,14 @@ set encoding=utf-8
 " ----------------------------------------------------------------------------
 "  various
 " ----------------------------------------------------------------------------
+"  zencoding
+let g:user_zen_expandabbr_key = '<c-e>' 
+let g:use_zen_complete_tag = 1
+let g:user_zen_leader_key = '<c-k>'
+
+" do not hide quotes in JSON
+set conceallevel=0
+
 set gdefault                    " For :substitute, use the /g flag by default
 
 "enable modeline
@@ -321,3 +343,10 @@ function! SummarizeTabs()
   endtry
 endfunction
 
+" Returns true if paste mode is enabled
+function! HasPaste()
+    if &paste
+        return ' < PASTE'
+    en
+    return ''
+endfunction

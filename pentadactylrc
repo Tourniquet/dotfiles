@@ -1,0 +1,3 @@
+js editor.defaultRegister="+"
+nmap -builtin <C-c> Y
+

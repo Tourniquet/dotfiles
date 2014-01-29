@@ -28,42 +28,44 @@ MYVIMRC=$BASHRC_DIR/.vimrc
 
 
 case "$TERM" in
-xterm*|rxvt*)
+xterm*|rxvt*|screen-256*)
   #fancy prompt
-  PS1="\[\033[$COLOR\][\A]\${?#0}\u@\h\[\033[0m\]:\[\033[$COLOR\]\w\\[\033[0m\]\$ "
+	if [ -z "$leaveMyPromptAlone" ]; then
+		PS1="\[\033[$COLOR\][\A]\${?#0}\u@\h\[\033[0m\]:\[\033[$COLOR\]\w\\[\033[0m\]\$ "
 
-  if [ -z "$disableGitPrompt" ]; then
-    #if we have git, use the fancy prompt with git info
-    which git > /dev/null 2>&1
-    if [ $? -eq 0 ] ; then
-			# Function to assemble the Git parsingart of our prompt.
-			git_prompt () {
-				c_git_clean='\[\033[32m\]'
-				c_git_dirty='\[\033[31m\]'
-				c_git_undecided='\[\033[33m\]'
-				c_reset='\[\033[0m\]'
-				if ! git rev-parse --git-dir > /dev/null 2>&1; then
-					return 0
-				fi
-
-
-				git_branch=$(git branch 2>/dev/null | sed -n '/^\*/s/^\* //p')
-
-				if [[ -z $disableGitDiff ]]; then 
-					if git diff --quiet 2>/dev/null >&2; then
-						git_color="$c_git_clean"
-					else
-						git_color="$c_git_dirty"
+		if [ -z "$disableGitPrompt" ]; then
+			#if we have git, use the fancy prompt with git info
+			which git > /dev/null 2>&1
+			if [ $? -eq 0 ] ; then
+				# Function to assemble the Git parsingart of our prompt.
+				git_prompt () {
+					c_git_clean='\[\033[32m\]'
+					c_git_dirty='\[\033[31m\]'
+					c_git_undecided='\[\033[33m\]'
+					c_reset='\[\033[0m\]'
+					if ! git rev-parse --git-dir > /dev/null 2>&1; then
+						return 0
 					fi
-				else 
-					git_color="$c_git_undecided"
-				fi
 
-				echo " [$git_color$git_branch${c_reset}]"
-			}
-      PROMPT_COMMAND='PS1="\[\033[$COLOR\][\A]\${?#0}\u@\h\[\033[0m\]:\[\033[$COLOR\]\w\[\033[0m\]`git_prompt`\[\033[0m\]\$\[\033[0m\] "'
-    fi
-  fi
+
+					git_branch=$(git branch 2>/dev/null | sed -n '/^\*/s/^\* //p')
+
+					if [[ -z $disableGitDiff ]]; then 
+						if git diff --quiet 2>/dev/null >&2; then
+							git_color="$c_git_clean"
+						else
+							git_color="$c_git_dirty"
+						fi
+					else 
+						git_color="$c_git_undecided"
+					fi
+
+					echo " [$git_color$git_branch${c_reset}]"
+				}
+				PROMPT_COMMAND='PS1="\[\033[$COLOR\][\A]\${?#0}\u@\h\[\033[0m\]:\[\033[$COLOR\]\w\[\033[0m\]`git_prompt`\[\033[0m\]\$\[\033[0m\] "'
+			fi
+		fi
+	fi
 
   # Show the currently running command in the terminal title:
   # http://www.davidpashley.com/articles/xterm-titles-with-bash.html
@@ -86,7 +88,7 @@ xterm*|rxvt*)
   trap show_command_in_title_bar DEBUG
 	;;
 *)
-  PS1="crappy_bash\$"
+  PS1="\h \$ "
 	;;
 esac
 
@@ -119,6 +121,7 @@ alias egrep='egrep --color=auto'
 alias td='rnd=$RANDOM; mkdir /tmp/`whoami`$rnd; cd /tmp/`whoami`$rnd'
 alias rot13="tr a-zA-Z n-za-mN-ZA-M"
 alias mysql="mysql --auto-rehash"
+alias breakparams="sed 's/\s-/\n&/g'"
 
 #typos
 alias shh=ssh
@@ -188,3 +191,4 @@ if [[ -f ~/.firstTimeHere ]]; then
   fi
   rm .firstTimeHere .bash_local.dist;
 fi
+true

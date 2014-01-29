@@ -1,0 +1,11 @@
+inoremap jj <ESC>
+set hlsearch
+set incsearch
+set ignorecase "smartcase is only used when ignorecase is set
+set smartcase
+nnoremap <SPACE> :noh<ENTER>
+set tabstop=4
+set softtabstop=4
+set shiftwidth=4
+set expandtab
+set scrolloff=3

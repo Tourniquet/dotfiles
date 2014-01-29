@@ -1,0 +1,73 @@
+! General
+!urxvt*termName:  rxvt-256color
+urxvt*loginShell:         true
+urxvt*scrollBar:         false
+urxvt*secondaryScroll:    true
+urxvt*saveLines:         65535
+urxvt*cursorBlink:       false
+urxvt*urgentOnBell:       true
+!urxvt*override-redirect:false
+!urxvt*borderLess:       false
+!urxvt*internalBorder:       0
+!urxvt*externalBorder:       0
+
+URxvt*scrollTtyOutput:      false
+URxvt*scrollWithBuffer:     true
+URxvt*scrollTtyKeypress:    true
+
+! Extensions
+urxvt*perl-lib:        /usr/lib/urxvt/perl/
+urxvt*perl-ext-common: default,matcher,searchable-scrollback
+urxvt*urlLauncher:     /usr/bin/firefox
+urxvt*matcher.button:  1
+!  - catch ugly URLs
+urxvt.cutchars:        `()'*<>[]{|}"
+
+! Appearance
+!  - use a bitmap font
+!urxvt*font:        -xos4-terminus-medium-*-*-*-12-*-*-*-*-*-*-*
+!urxvt*boldFont:    -xos4-terminus-bold-*-*-*-12-*-*-*-*-*-*-*
+!  - use xft for drawing fonts
+!urxvt*font:       xft:Terminus:bold:14,\ xft:Anonymous\ Pro\ for\ Powerline:14
+!urxvt*boldFont:       xft:Terminus:bold:14
+!anonymous pro is fallback font for powerline icons
+urxvt*font: xft:Terminus:bold:14,xft:Anonymous\ Pro\ for\ Powerline:14
+urxvt*boldFont: xft:Terminus:bold:14,xft:Anonymous\ Pro\ for\ Powerline:14
+!  - cursor
+urxvt*cursorColor: #DCDCCC
+!  - pseudo transparency
+!urxvt*shading:    50
+!urxvt*transparent:true
+!
+!  - color scheme
+!urxvt.background:  #171717
+urxvt.background:  #000000
+urxvt.foreground:  #b0b0b0
+! black + red
+!urxvt*color0:     #3f3f3f
+urxvt*color0:      #000000
+urxvt*color1:      #ff3e82
+! green + yellow
+urxvt*color2:      #ace35d
+urxvt*color3:      #ffa645
+! blue + purple
+urxvt*color4:      #65e0f0
+urxvt*color5:      #b48bf7
+! cyan + white
+urxvt*color6:      #6f8488
+urxvt*color7:      #d6d5d1
+! bright-black + bright-red
+urxvt*color8:      #626667
+urxvt*color9:      #ff7eaa
+! bright-green + bright-yellow
+urxvt*color10:     #c3ed84
+urxvt*color11:     #ebdf92
+! bright-blue + bright-purple
+urxvt*color12:     #65e0f0
+urxvt*color13:     #b48bf7
+! bright-cyan + bright-white
+urxvt*color14:     #b0c6ca
+urxvt*color15:     #ffffff
+
+urxvt*iso14755: false
+urxvt*iso14755_52: false

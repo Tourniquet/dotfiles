@@ -1,3 +1,5 @@
 js editor.defaultRegister="+"
 nmap -builtin <C-c> Y
+nmap -ex d tabclose
+highlight Hint font: bold 14px "Droid Sans Mono", monospace !important; margin: -.2ex; padding: 0 0 0 1px; outline: 1px solid rgba(0, 0, 0, .5); background: rgba(255, 248, 231, .8); color: black;
 

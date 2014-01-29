@@ -1,5 +1,5 @@
 OPTIONS=autopickup,pickup_types:$
-OPTIONS=autodig
+OPTIONS=autodig,autoquiver
 OPTIONS=!prayconfirm,!cmdassist
 OPTIONS=number_pad:0
 OPTIONS=boulder:0

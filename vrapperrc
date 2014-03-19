@@ -7,5 +7,5 @@ nnoremap <SPACE> :noh<ENTER>
 set tabstop=4
 set softtabstop=4
 set shiftwidth=4
-set expandtab
+set noexpandtab
 set scrolloff=3

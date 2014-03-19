@@ -40,25 +40,29 @@ CASE_SENSITIVE="true"
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
-plugins=(cp colorize git git-extras gitfast vi-mode vundle taskwarrior)
+# plugins=(cp colorize git git-extras gitfast vi-mode vundle taskwarrior)
 
-source $ZSH/oh-my-zsh.sh
 
 # Customize to your needs...
-export PATH=$PATH:/usr/lib/lightdm/lightdm:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/opt/android-sdk-linux/platform-tools:/opt/forge/bin:/home/latzer/bin
+export PATH=$PATH:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games
 
-automount_ecryptfs.backup
+# zsh plugins depending on system
+if [ -f ~/.zsh_plugins ]; then
+	source ~/.zsh_plugins
+fi
+
+# oh-my-zsh
+if [ -f $ZSH/oh-my-zsh.sh ]; then
+	source $ZSH/oh-my-zsh.sh
+fi
+
+# local customizations
+if [ -f ~/.zsh_local ]; then
+	source ~/.zsh_local
+fi
 
 #alias git=git-achievements
-alias j=/home/latzer/code/shell/bin-macdla/openNewestJournal.sh
-alias invade=/home/latzer/code/shell/bin-macdla/invade.sh
-alias g="source /opt/instaCD/instaCD.zsh"
-alias pm-hibernate="sudo pm-hibernate"
-#alias git="git achievements"
 alias breakparams="sed 's/\s-/\n&/g'"
 alias l="ls -lh"
 alias ll="ls -lah"
 alias murder="kill -9"
-alias jboss="/opt/jboss/bin/standalone.sh"
-alias vi="vim --servername vim"
-fortune -s

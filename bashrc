@@ -192,3 +192,5 @@ if [[ -f ~/.firstTimeHere ]]; then
   rm .firstTimeHere .bash_local.dist;
 fi
 true
+
+PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting

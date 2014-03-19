@@ -28,7 +28,7 @@ Bundle 'vim-scripts/closetag.vim'
 Bundle 'kana/vim-textobj-user'
 Bundle 'glts/vim-textobj-comment'
 Bundle 'Valloric/YouCompleteMe'
-Bundle 'csexton/trailertrash'
+Bundle 'csexton/trailertrash.vim'
 
 " misc
 Bundle 'tpope/vim-fugitive'
@@ -56,6 +56,9 @@ set incsearch       " Highlight pattern matches as you type
 set ignorecase      " ignore case when using a search pattern
 set smartcase       " override 'ignorecase' when pattern
                     " has upper case character
+nnoremap j gj
+nnoremap k gk
+nnoremap K gk
 
 " ----------------------------------------------------------------------------
 "  displaying text
@@ -106,6 +109,8 @@ set cursorline "highlight current line
 set hlsearch            " highlight the last searched term
 "set colorcolumn=80    " display a line in column 80 to show you
                       " when to line break.
+
+let g:tex_comment_nospell=1
 
 " ----------------------------------------------------------------------------
 "  multiple windows
@@ -165,7 +170,7 @@ set shiftround            " round to 'shiftwidth' for "<<" and ">>"
 set tabstop=2
 set softtabstop=2
 set shiftwidth=2
-set noexpandtab
+set expandtab
 
 set cindent
 set cinkeys-=0#
@@ -199,6 +204,9 @@ nmap <leader>p :set paste!<CR>
 
 "sudo write
 cnoremap w!! w !sudo tee % > /dev/null
+
+nnoremap <F1> <nop>
+inoremap <F1> <nop>
 
 " ----------------------------------------------------------------------------
 "  reading and writing files
@@ -279,8 +287,8 @@ au BufNewFile,BufRead *.ics set filetype=ics
 " ----------------------------------------------------------------------------
 " Allow overriding these settings
 " ----------------------------------------------------------------------------
-if filereadable(expand("~/.vimrc.local"))
-  source ~/.vimrc.local
+if filereadable(expand("~/.vim_local"))
+  source ~/.vim_local
 endif
 
 " ----------------------------------------------------------------------------
@@ -336,5 +344,39 @@ function! SummarizeTabs()
     echohl None
   endtry
 endfunction
+
+" Compatible with ranger 1.4.2 through 1.6.*
+"
+" Add ranger as a file chooser in vim
+"
+" If you add this code to the .vimrc, ranger can be started using the command
+" ":RangerChooser" or the keybinding "<leader>r". Once you select one or more
+" files, press enter and ranger will quit again and vim will open the selected
+" files.
+
+function! RangeChooser()
+  let temp = tempname()
+" The option "--choosefiles" was added in ranger 1.5.1. Use the next line
+" with ranger 1.4.2 through 1.5.0 instead.
+"exec 'silent !ranger --choosefile=' . shellescape(temp)
+  exec 'silent !ranger --choosefiles=' . shellescape(temp)
+  if !filereadable(temp)
+" Nothing to read.
+    return
+  endif
+  let names = readfile(temp)
+  if empty(names)
+" Nothing to open.
+    return
+  endif
+" Edit the first item.
+  exec 'edit ' . fnameescape(names[0])
+" Add any remaning items to the arg list/buffer list.
+  for name in names[1:]
+    exec 'argadd ' . fnameescape(name)
+  endfor
+endfunction
+command! -bar RangerChooser call RangeChooser()
+nnoremap <leader>o :<C-U>RangerChooser<CR><C-L>
 
 "vim: set expandtab:

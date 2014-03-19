@@ -37,14 +37,14 @@ Bundle 'vim-scripts/LaTeX-Box'
 " statusline
 Bundle 'bling/vim-airline'
 Bundle 'bling/vim-bufferline'
-let g:airline_powerline_fonts = 1
-let g:airline_theme = 'zenburn'
+let g:airline_theme = 'hybrid'
 
 " Syntax check on buffer save
 Bundle 'scrooloose/syntastic'
 
 " Colorschemes
 Bundle 'flazz/vim-colorschemes'
+Bundle 'w0ng/vim-hybrid'
 
 filetype plugin indent on     " required!
 
@@ -96,7 +96,9 @@ endif
 if &t_Co == 256
   " settings for pretty 256-color theme
   "colorscheme ir_black
-  colorscheme zenburn
+  "colorscheme zenburn
+  let g:hybrid_use_Xresources = 1
+  colorscheme hybrid
 endif
 
 set cursorline "highlight current line

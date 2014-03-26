@@ -202,7 +202,7 @@ nmap <leader>n :nohlsearch<CR>
 " Shortcut to rapidly toggle `set list`
 nmap <leader>l :set list!<CR>
 
-nmap <leader>p :set paste!<CR>
+nmap <leader>a :set paste!<CR>
 
 nmap <leader>w :w<CR>
 

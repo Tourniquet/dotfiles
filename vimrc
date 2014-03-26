@@ -43,7 +43,7 @@ let g:airline_theme = 'hybrid'
 Bundle 'scrooloose/syntastic'
 
 " Colorschemes
-Bundle 'flazz/vim-colorschemes'
+"Bundle 'flazz/vim-colorschemes'
 Bundle 'w0ng/vim-hybrid'
 
 filetype plugin indent on     " required!
@@ -150,7 +150,7 @@ set ruler           " Always display the current cursor position in
 " ----------------------------------------------------------------------------
 "  selecting text
 " ----------------------------------------------------------------------------
-set clipboard=unnamed  " Yank to the system clipboard by default
+"set clipboard=unnamed  " Yank to the system clipboard by default
 
 " ----------------------------------------------------------------------------
 "  editing text
@@ -190,21 +190,35 @@ set foldlevelstart=10 " open most folds by default
 " ----------------------------------------------------------------------------
 "  mapping
 " ----------------------------------------------------------------------------
-"map escape to 'jj' in insert mode
-:inoremap jj <esc>
+"
+let mapleader = "\<space>"
 
-"space cancels higlighting
-:nnoremap <space> :nohlsearch
+"map escape to 'jj' in insert mode
+inoremap jj <esc>
+
+"cancel higlighting
+nmap <leader>n :nohlsearch<CR>
 
 " Shortcut to rapidly toggle `set list`
 nmap <leader>l :set list!<CR>
-nmap <leader>i :set list!<CR>
 
 nmap <leader>p :set paste!<CR>
 
-"sudo write
-cnoremap w!! w !sudo tee % > /dev/null
+nmap <leader>w :w<CR>
 
+"copy/paste to system clipboard
+vmap <Leader>y "+y
+vmap <Leader>d "+d
+nmap <Leader>p "+p
+nmap <Leader>P "+P
+vmap <Leader>p "+p
+vmap <Leader>P "+P
+
+"sudo write
+cnoremap w!! w !sudo tee % > /dev/null<CR>
+nmap <leader>W :!sudo tee % > /dev/null<CR>
+
+"disable help popping up on F1"
 nnoremap <F1> <nop>
 inoremap <F1> <nop>
 
@@ -377,6 +391,7 @@ function! RangeChooser()
   endfor
 endfunction
 command! -bar RangerChooser call RangeChooser()
+
 nnoremap <leader>o :<C-U>RangerChooser<CR><C-L>
 
 "vim: set expandtab:
